@@ -30,6 +30,34 @@ CREATE TABLE SpotifyClone.followed_artist(
 	FOREIGN KEY (user_id) REFERENCES SpotifyClone.users (idusers)
 );
 
+CREATE TABLE SpotifyClone.album(
+	album_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    idartist INT,
+    album_name VARCHAR(45),
+    release_year YEAR,
+    FOREIGN KEY (idartist) REFERENCES SpotifyClone.artist(idartist)
+    );
+
+CREATE TABLE SpotifyClone.songs(
+	song_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    artist_id INT,
+    album_id INT,
+    song_name VARCHAR(45),
+    length INT,
+    FOREIGN KEY (artist_id) REFERENCES SpotifyClone.artist(idartist),
+    FOREIGN KEY (album_id) REFERENCES SpotifyClone.album(album_id)
+);
+
+CREATE TABLE SpotifyClone.historico(
+	idusers INT,
+    played_song INT,
+    played_on DATETIME,
+    CONSTRAINT PRIMARY KEY(idusers, played_song),
+	FOREIGN KEY (idusers) REFERENCES SpotifyClone.users(idusers),
+    FOREIGN KEY (played_song) REFERENCES SpotifyClone.songs(song_id)
+    
+);
+
   INSERT INTO SpotifyClone.plans(idplan, plan_value, plan_name)
 	  VALUES
 		(1, 0.00, 'gratuito'),
@@ -75,3 +103,45 @@ INSERT INTO SpotifyClone.followed_artist(user_id, artist_id)
         (7, 6),
         (9, 3),
         (10, 2);
+
+INSERT INTO SpotifyClone.album(idartist, album_name, release_year)
+	VALUES
+		(1, 'Renaissance', '2022'),
+        (2, 'Jazz', '1978'),
+        (2, 'Hot Space', '1982'),
+        (3, 'Falso Brilhante', '1998'),
+        (3, 'Vento de Maio', '2001'),
+        (4, 'QVVJFA?', '2003'),
+        (5, 'Somewhere Far Beyond', '2007'),
+        (6, 'I Put A Spell On You', '2012');
+
+INSERT INTO SpotifyClone.songs(artist_id, album_id, song_name, length)
+	VALUES
+		(1, 1, 'BREAK MY SOUL', 279),
+        (1, 1, 'VIRGO’S GROOVE', 369),
+        (1, 1, 'ALIEN SUPERSTAR', 116),
+        (2, 2, 'Don’t Stop Me Now', 203),
+        (2, 3, 'Under Pressure', 152),
+        (3, 4, 'Como Nossos Pais', 105),
+        (3, 5, 'O Medo de Amar é o Medo de Ser Livre', 207),
+        (4, 6, 'Samba em Paris', 267),
+        (5, 7, 'The Bard’s Song', 244),
+        (6, 8, 'Feeling Good', 100);
+INSERT INTO SpotifyClone.historico(idusers, played_song, played_on)
+	VALUES
+		(1, 8, '2022-02-28 10:45:55'),
+        (1, 2, '2020-05-02 05:30:35'),
+        (1, 10, '2020-03-06 11:22:33'),
+        (2, 10, '2022-08-05 08:05:17'),
+        (2, 7, '2020-01-02 07:40:33'),
+        (3, 10, '2020-11-13 16:55:13'),
+        (3, 2, '2020-12-05 18:38:30'),
+        (4, 8, '2021-08-15 17:10:10'),
+        (5, 8, '2022-01-09 01:44:33'),
+        (5, 5, '2020-08-06 15:23:43'),
+        (6, 7, '2017-01-24 00:31:17'),
+        (6, 1, '2017-10-12 12:35:20'),
+        (7, 4, '2011-12-15 22:30:49'),
+        (8, 4, '2012-03-17 14:56:41'),
+        (9, 9, '2022-02-24 21:14:22'),
+        (10, 3, '2015-12-13 08:30:22');

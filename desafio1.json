@@ -4,13 +4,13 @@
   "tabela_plano": "plans",
   "coluna_plano": "plan_name",
   "tabela_historico_de_reproducoes": "historico",
-  "coluna_historico_de_reproducoes": "cancao",
+  "coluna_historico_de_reproducoes": "played_song",
   "tabela_seguindo_artistas": "followed_artist",
   "coluna_seguindo_artistas": "artist_id",
   "tabela_artista": "artist",
   "coluna_artista": "artist_name",
   "tabela_album": "album",
-  "coluna_album": "album_name",
-  "tabela_cancoes": "cancoes",
-  "coluna_cancoes": "cancoes_name"
+  "coluna_album": "album_id",
+  "tabela_cancoes": "songs",
+  "coluna_cancoes": "song_id"
 }
